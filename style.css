@@ -1758,3 +1758,47 @@ body::before {
   margin-bottom: var(--sp-md);
   font-style: italic;
 }
+
+/* =========================================
+   ARTWORK DETAIL + ACCESSIBILITY ADDITIONS
+   (kept last so earlier override blocks cannot cancel these)
+========================================= */
+
+/* Show each painting complete in the modal, whatever its proportions */
+.modal__image img {
+  object-fit: contain;
+}
+
+/* Multi-paragraph descriptions: same typography, calm paragraph rhythm */
+.modal__description + .modal__description {
+  margin-top: -6px;
+}
+
+/* Keyboard focus that matches the gold accent */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[data-artwork]:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Art 7 / Art 8 card metadata: slightly tighter tracking on desktop so the
+   full line (including "Original") stays on one line. Art 1-6 unaffected. */
+@media (min-width: 1025px) {
+  .art-card[data-artwork="art7"] .art-card__meta,
+  .art-card[data-artwork="art8"] .art-card__meta {
+    letter-spacing: 0.035em;
+  }
+}
